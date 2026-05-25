@@ -1,0 +1,168 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+Distribution of Z
+```{r}
+x <- 10
+y <- 5
+z <- x - 4 * y
+print(z)
+```
+Cap Calculator U & ∩
+```{r}
+P_A <- 0.8
+P_B <- 0.5
+
+# Compute P(A ∩ B) for independent events
+P_AB <- P_A * P_B
+
+print(P_AB)
+```
+
+Union & Cap Calculator U & ∩
+```{r}
+P_A <- 0.4
+P_B <- 0.5
+
+# Compute P(A ∩ B) for independent events
+P_AB <- P_A * P_B
+
+# Compute P(A ∪ B)
+P_AUB <- P_A + P_B - P_AB
+
+print(P_AUB)
+```
+Exactly Binomial Distribution
+```{r}
+prob <- 1/10
+size <- 5
+
+target <- 1
+
+dbinom(target,size,prob)
+```
+Confidence Interval
+```{r}
+size <- 10
+mean <- 50
+sd <- 8
+conf_level <- 0.95
+
+df <- size-1
+t_crit <- qt(1 - (1 - conf_level)/2, df)
+se <- sd / sqrt(size)
+me <- t_crit * se
+
+lower <- mean - me
+upper <- mean + me
+c(lower,upper)
+```
+Exact Exponential distribution
+```{r}
+
+ratepara <- 0.2
+target <- 50
+
+pexp(10,ratepara)
+```
+
+Greater than Exponential distribution
+```{r}
+
+ratepara <- 0.2
+
+target <- 10
+
+exp(-ratepara * target)
+```
+Tukey's Fences Method
+```{r}
+q1 <- 20
+q3 <- 40
+
+iqr <- q3 - q1
+lower <- q1 - 1.5 * iqr
+upper <- q3 + 1.5 * iqr
+
+print(lower)
+print(upper)
+```
+Confidene Interval for Population Mean
+```{r}
+h <- c(168, 161, 167, 179, 184, 166, 198, 187, 191, 179)
+conf_int <- 0.99
+
+t.test(h, conf.level = conf_int)
+```
+Test statistic
+```{r}
+mean <- 52
+hypothesis <- 50
+sd <- 4
+size <- 16
+
+t_stat <- (mean - hypothesis) / (sd / sqrt(size))
+t_stat
+```
+
+Prop Test
+```{r}
+x = c(62, 48)
+n = c(300, 300)
+
+prop.test(x, n, correct = FALSE)
+
+# p > 0.01 = accept
+```
+Random Data for testing 
+```{r}
+x1 <- 1
+x2 <- 1
+newdata <- data.frame(x = 10)
+
+ summary(lm(y ~ x1 + x2, data = newdata))
+```
+Paired Test
+
+```{r}
+chol_before <- c(9.1, 8.0, 7.7, 10.0, 9.6, 7.9, 9.0, 7.1, 8.3, 9.6, 8.2, 9.2, 7.3, 8.5, 9.5)
+chol_after  <- c(8.2, 6.4, 6.6, 8.5, 8.0, 5.8, 7.8, 7.2, 6.7, 9.8, 7.1, 7.7, 6.0, 6.6, 8.4)
+
+t.test(chol_after, chol_before, paired = TRUE)
+```
+Find missing data
+```{r}
+mean <- 0.5
+valuecount <- 4
+values <- (-0.34 + 0.82 + 0.5)
+mean * valuecount - values
+```
+
+Correaltion Computation
+```{r}
+sd1 <- 0.755
+sd2 <- 0.132
+covariance <- 0.319
+covariance / (sd1*sd2)
+```
+
+Cumulative Distribution Function Standard Deviation
+```{r}
+sd = 0.95
+qnorm(sd)
+```
+
+Test Model
+```{r}
+distance_to_source <- c(2, 4, 6, 8, 10)
+conc <- c(11.5, 10.2, 10.3, 9.68, 9.32)
+
+model <- lm(conc ~ distance_to_source)
+summary(model)
+```
+
+
+
