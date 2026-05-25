@@ -6,44 +6,137 @@ output: html_notebook
 
 Distribution of Z
 ```{r}
-x <- 10
-y <- 5
-z <- x - 4 * y
+x <- 0
+y <- 0.5
+z <- 10 * x + 1 * y
 print(z)
 ```
-Cap Calculator U & ∩
+
+Normal Distribution of Z
 ```{r}
-P_A <- 0.8
+# Mean
+x <- 0.1
+y <- 0.1
+10 * x + 1 * y
+
+# variance
+x <- 1
+y <- 2
+10^2 * x + 1^2 * y
+```
+
+
+
+Cap Calculator ∩
+```{r}
+P_A <- 0.5
 P_B <- 0.5
 
-# Compute P(A ∩ B) for independent events
 P_AB <- P_A * P_B
 
 print(P_AB)
 ```
 
-Union & Cap Calculator U & ∩
+Union Calculator U
 ```{r}
 P_A <- 0.4
 P_B <- 0.5
 
-# Compute P(A ∩ B) for independent events
 P_AB <- P_A * P_B
 
-# Compute P(A ∪ B)
 P_AUB <- P_A + P_B - P_AB
 
 print(P_AUB)
 ```
+
+Bayes Theorm
+```{r}
+P_X_given_Y <- 0.97
+P_X_given_Yc <- 0.01
+P_Y <- 0.001
+
+P_Yc <- 1- P_Y
+
+P_X <- P_X_given_Y * P_Y + P_X_given_Yc * P_Yc
+
+(P_X_given_Y * P_Y) / P_X
+```
+
+
 Exactly Binomial Distribution
 ```{r}
-prob <- 1/10
-size <- 5
+prob <- 6/100
+size <- 10
 
-target <- 1
+target <- 3
 
 dbinom(target,size,prob)
 ```
+
+
+Greater Than Binomial Distribution
+```{r}
+prob <- 6/100
+size <- 10
+
+target <- 3
+
+pbinom(target,size,prob)
+```
+
+
+
+Exact Exponential distribution
+```{r}
+
+ratepara <- 0.2
+target <- 50
+
+pexp(target,ratepara)
+```
+
+
+Greater than Exponential distribution
+```{r}
+
+ratepara <- 0.2
+
+target <- 10
+
+exp(-ratepara * target)
+```
+
+
+Normal Distribution
+```{r}
+
+F <- 1
+mean <- 0.5
+sd <- 0.5
+
+pnorm(F, mean, sd)
+
+
+```
+
+Mean and Variance of PDF
+```{r}
+
+x <- c(1,2,3,4,5)
+
+# Mean
+mean <- sum(x) / length(x)
+
+# Variance
+xSquared <- sum(x^2) / length(x)
+variance <- xSquared - mean^2
+
+print(mean)
+print(variance)
+
+```
+
+
 Confidence Interval
 ```{r}
 size <- 10
@@ -60,24 +153,8 @@ lower <- mean - me
 upper <- mean + me
 c(lower,upper)
 ```
-Exact Exponential distribution
-```{r}
 
-ratepara <- 0.2
-target <- 50
 
-pexp(10,ratepara)
-```
-
-Greater than Exponential distribution
-```{r}
-
-ratepara <- 0.2
-
-target <- 10
-
-exp(-ratepara * target)
-```
 Tukey's Fences Method
 ```{r}
 q1 <- 20
@@ -90,13 +167,31 @@ upper <- q3 + 1.5 * iqr
 print(lower)
 print(upper)
 ```
+
+
 Confidene Interval for Population Mean
 ```{r}
-h <- c(168, 161, 167, 179, 184, 166, 198, 187, 191, 179)
-conf_int <- 0.99
+data <- c(5260, 5470, 5640, 6180, 6390, 6515, 6805, 7515, 7515, 8230, 8770)
+conf_int <- 0.95
 
-t.test(h, conf.level = conf_int)
+t.test(data, conf.level = conf_int)
 ```
+
+Confidene Interval for Population Standard Deviation
+```{r}
+data <- c(5260, 5470, 5640, 6180, 6390, 6515, 6805, 7515, 7515, 8230, 8770)
+
+conf_level <- 1 - 0.95
+
+n <- length(data)
+s <- var(data)
+
+sqrt(((n - 1)* s) / qchisq(1 - 0.05/2, n - 1))
+sqrt(((n - 1)* var(energy)) / qchisq(0.05/2, n - 1))
+```
+
+
+
 Test statistic
 ```{r}
 mean <- 52
@@ -108,6 +203,7 @@ t_stat <- (mean - hypothesis) / (sd / sqrt(size))
 t_stat
 ```
 
+
 Prop Test
 ```{r}
 x = c(62, 48)
@@ -117,6 +213,8 @@ prop.test(x, n, correct = FALSE)
 
 # p > 0.01 = accept
 ```
+
+
 Random Data for testing 
 ```{r}
 x1 <- 1
@@ -125,6 +223,8 @@ newdata <- data.frame(x = 10)
 
  summary(lm(y ~ x1 + x2, data = newdata))
 ```
+
+
 Paired Test
 
 ```{r}
@@ -133,6 +233,8 @@ chol_after  <- c(8.2, 6.4, 6.6, 8.5, 8.0, 5.8, 7.8, 7.2, 6.7, 9.8, 7.1, 7.7, 6.0
 
 t.test(chol_after, chol_before, paired = TRUE)
 ```
+
+
 Find missing data
 ```{r}
 mean <- 0.5
@@ -149,12 +251,20 @@ covariance <- 0.319
 covariance / (sd1*sd2)
 ```
 
-Cumulative Distribution Function Standard Deviation
+Cumulative Distribution Function (CDF) Standard Normal Distribution
 ```{r}
-sd = 0.95
+sd = 0.65
+
 qnorm(sd)
 ```
 
+Student's t Distribution with Degrees of Freedom
+```{r}
+df <- 10
+x <- 0.85
+
+qt(x, df)
+```
 Test Model
 ```{r}
 distance_to_source <- c(2, 4, 6, 8, 10)
@@ -163,6 +273,29 @@ conc <- c(11.5, 10.2, 10.3, 9.68, 9.32)
 model <- lm(conc ~ distance_to_source)
 summary(model)
 ```
+
+
+Holt Winter's Exponential Model
+```{r}
+distance_to_source <- c(2, 4, 6, 8, 10)
+conc <- c(11.5, 10.2, 10.3, 9.68, 9.32)
+
+model <- lm(conc ~ distance_to_source)
+summary(model)
+```
+
+
+
+Predict Holt Winter
+```{r}
+data(EuStockMarkets) 
+DAX <- EuStockMarkets[, 1] 
+
+m <- HoltWinters(DAX) 
+predict(m, n.ahead = 1)
+
+```
+
 
 
 

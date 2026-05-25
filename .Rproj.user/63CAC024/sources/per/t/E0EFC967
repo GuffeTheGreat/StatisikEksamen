@@ -1,6 +1,6 @@
 {
     "id": "E0EFC967",
-    "path": "D:/RStudio/Projects/School/Eksamen/file.R",
+    "path": "D:/RStudio/Projects/School/StatisikEksamen/file.R",
     "project_path": "file.R",
     "type": "r_source",
     "hash": "3769103418",
@@ -13,8 +13,8 @@
         "tempName": "Untitled1",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "104,19",
-        "scrollLine": "92"
+        "cursorPosition": "65,12",
+        "scrollLine": "34"
     },
     "folds": "",
     "lastKnownWriteTime": 1779626255,
