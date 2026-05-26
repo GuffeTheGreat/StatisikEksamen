@@ -118,8 +118,16 @@ newdata <- data.frame(x = 5)
 predict(model, newdata, interval = "confidence")
 predict(model, newdata, interval = "prediction")
 
-## Joint Probabilityes
 
+
+
+
+x <- c(10, 10.5, 3.5, 9.7, 5.5)
+n <- length(x)
+mu0 <- 10
+# Compute the test statistic
+tobs <- (mean(x) - mu0) / (sd(x)/sqrt(n))
+print(tobs)
 
 
 

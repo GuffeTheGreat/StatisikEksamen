@@ -6,35 +6,25 @@ output: html_notebook
 
 Distribution of Z
 ```{r}
-x <- 0
-y <- 0.5
-z <- 10 * x + 1 * y
-print(z)
-```
-
-Normal Distribution of Z
-```{r}
 # Mean
-x <- 0.1
+x <-0.1
 y <- 0.1
-10 * x + 1 * y
+10 * x +1  * y
 
 # variance
 x <- 1
 y <- 2
-10^2 * x + 1^2 * y
+# In event of Variance square non random variables
+10^2 *x + 1^2 * y
 ```
-
-
 
 Cap Calculator ∩
 ```{r}
-P_A <- 0.5
+P_A <- 0.8
 P_B <- 0.5
 
-P_AB <- P_A * P_B
+P_A * P_B
 
-print(P_AB)
 ```
 
 Union Calculator U
@@ -44,12 +34,11 @@ P_B <- 0.5
 
 P_AB <- P_A * P_B
 
-P_AUB <- P_A + P_B - P_AB
+P_A + P_B - P_AB
 
-print(P_AUB)
 ```
 
-Bayes Theorm
+Bayes Theorum
 ```{r}
 P_X_given_Y <- 0.97
 P_X_given_Yc <- 0.01
@@ -59,63 +48,150 @@ P_Yc <- 1- P_Y
 
 P_X <- P_X_given_Y * P_Y + P_X_given_Yc * P_Yc
 
-(P_X_given_Y * P_Y) / P_X
+P_Y_given_X <- (P_X_given_Y * P_Y) / P_X
+print(P_Y_given_X)
 ```
 
 
 Exactly Binomial Distribution
 ```{r}
-prob <- 6/100
-size <- 10
+
+# P (X = target)
 
 target <- 3
+prob <- 6/100
+size <- 10
 
 dbinom(target,size,prob)
 ```
 
-
 Greater Than Binomial Distribution
 ```{r}
-prob <- 6/100
-size <- 10
 
-target <- 3
+# P (X =< target)
+
+target <- 10
+prob <- 1/3
+size <- 20
 
 pbinom(target,size,prob)
 ```
 
+Less Than Binomial Distribution
+```{r}
 
+# P (X > target)
+
+target <- 3
+prob <- 6/100
+size <- 10
+
+1 - pbinom(target,size,prob)
+```
+
+Exactly Poission
+```{r}
+
+# P(X = target)
+
+target <- 3
+rate <- 2
+
+dpois(target,rate)
+```
+
+Greater Than Poission
+```{r}
+
+# P(X =< target)
+
+target <- 1
+rate <- 2
+
+ppois(target,rate)
+```
+
+Less Than Poission
+```{r}
+
+# P(X > target)
+
+target <- 1
+rate <- 2
+
+1 - ppois(target,rate)
+```
 
 Exact Exponential distribution
 ```{r}
 
-ratepara <- 0.2
-target <- 50
+# P(X = target)
 
-pexp(target,ratepara)
+target <- 50
+prob <- 0.2
+
+pexp(target,prob)
 ```
 
 
 Greater than Exponential distribution
 ```{r}
 
-ratepara <- 0.2
+# P(X >= target)
 
 target <- 10
+prob <- 1/5
 
-exp(-ratepara * target)
+exp(-prob * target)
 ```
 
-
-Normal Distribution
+Less than Exponential distribution
 ```{r}
 
-F <- 1
+# P(X =< target)
+
+target <- 10
+prob <- 1/150
+
+1 - exp(-prob * target)
+```
+
+Greater than Normal Distribution
+```{r}
+
+# (P(X) > target)
+target <- 0
+mean <- 0
+sd <- 1
+
+1 - pnorm(target, mean, sd)
+
+```
+
+Less Than Normal Distribution (Cumulative Distribution FUnction (CDF))
+```{r}
+
+# (P(X) =< target) 
+
+target <- 1
 mean <- 0.5
 sd <- 0.5
 
-pnorm(F, mean, sd)
+pnorm(target, mean, sd)
 
+
+```
+
+Between Normal Distribution
+```{r}
+mean <- 70
+sd <- 10
+
+#P(target1 < X =< target2)
+target1 <- 60
+target2 <- 80
+
+pnorm(target2,mean,sd)-pnorm(target1,mean,sd)
 
 ```
 
@@ -136,7 +212,6 @@ print(variance)
 
 ```
 
-
 Confidence Interval
 ```{r}
 size <- 10
@@ -151,9 +226,8 @@ me <- t_crit * se
 
 lower <- mean - me
 upper <- mean + me
-c(lower,upper)
+c(df, lower,upper)
 ```
-
 
 Tukey's Fences Method
 ```{r}
@@ -171,7 +245,7 @@ print(upper)
 
 Confidene Interval for Population Mean
 ```{r}
-data <- c(5260, 5470, 5640, 6180, 6390, 6515, 6805, 7515, 7515, 8230, 8770)
+data  <- c(5260, 5470, 5640, 6180, 6390, 6515, 6805, 7515, 7515, 8230, 8770)
 conf_int <- 0.95
 
 t.test(data, conf.level = conf_int)
@@ -255,6 +329,8 @@ Cumulative Distribution Function (CDF) Standard Normal Distribution
 ```{r}
 sd = 0.65
 
+# Qnorm(0.975) returns the 0.975th quantile
+
 qnorm(sd)
 ```
 
@@ -265,14 +341,22 @@ x <- 0.85
 
 qt(x, df)
 ```
-Test Model
+Test Model (Linear Regression Model)
 ```{r}
-distance_to_source <- c(2, 4, 6, 8, 10)
-conc <- c(11.5, 10.2, 10.3, 9.68, 9.32)
+x <- c(0.60, 0.52, 0.54, 0.09, 1.00, 0.05, 0.30, 0.26, 0.69, 0.29, 0.93)
+y <- c(0.87, 0.93, 1.00, 0.07, -0.01, 0.20, 0.77, 0.57, 0.73, 0.74, 0.49)
 
-model <- lm(conc ~ distance_to_source)
+
+model <- lm(y ~ x)
 summary(model)
+
+# z <- x^2
+# m <- lm(y ~ x + z)
+# summary(m)
+#test of b0 + b1x + b2z where z = x^2
 ```
+
+
 
 
 Holt Winter's Exponential Model
@@ -295,7 +379,56 @@ m <- HoltWinters(DAX)
 predict(m, n.ahead = 1)
 
 ```
+Aproxximate Slope
+```{r}
+x <- c(1, 2, 3, 4, 5) 
+y <- c(2, 4, 5, 4, 5) 
+model <- lm(y ~ x) 
+
+#Extract SLope
+coef(model)
+```
+
+Predict Value
+```{r}
+x <- c(1, 2, 3, 4,5) 
+y <- c(2, 4, 5, 4, 5) 
+model <- lm(y ~ x) 
+
+target <- 6
+
+new_data <- data.frame(x = target)
+predict(model, new_data)
+```
+
+Compute Residual Sum of Squares (RSS)
+```{r}
+e <- c(1,-1,2,-2)
+sum(e^2)
+```
+Signifance P-Value
+Alpha = 0.05
+Greater than Alpha = Not significant
+Less Than Alpha = Significant
 
 
 
+Reject or Accept Null Hypothesis
+```{r}
+PValue <- 0.01
+Alpha <- 0.001 #0.05 if not specified
+
+# If p-value is SMALL (less than 0.05) → REJECT H₀
+# If p-value is BIG (0.05 or more) → FAIL TO REJECT H₀
+
+if (PValue < Alpha) {
+  print("REJECT H₀")
+} else {
+  print("FAIL TO REJECT H₀ / Not Enough Evidence")
+}
+
+# You dont accept. You just fail to Reject / Not enough evidence
+
+
+```
 
